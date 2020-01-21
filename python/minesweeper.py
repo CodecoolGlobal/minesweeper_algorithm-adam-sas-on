@@ -96,9 +96,25 @@ def draw_board(stdscr, board, row_bg):
 
 #
 
+def increase_neighbor_rows(table, row, col):
+	if table[row][col] != '*':
+		return
+
+	rows = len(table)
+	cols = len(table[0])
+	i_j = [(row-1, col-1), (row-1, col), (row-1, col+1), (row, col-1), (row, col+1), (row+1, col-1), (row+1, col), (row+1, col+1)]
+	for (i, j) in i_j:
+		if i < 0 or j < 0 or i >= rows or j >= cols:
+			continue
+
+		if table[i][j] != '*':
+			table[i][j] += 1
+#
+
 def solve_mines_board(table):
+	rows = len(table)
 	i=0
-	while i < len(table):
+	while i < rows:
 		j=0
 		while j < len(table[i]):
 			if table[i][j] != '*':
@@ -106,6 +122,13 @@ def solve_mines_board(table):
 			j+=1
 		i+=1
 
+	i=0
+	while i < rows:
+		j=0
+		while j < len(table[i]):
+			increase_neighbor_rows(table, i, j)
+			j+=1
+		i+=1
 
 #
 
