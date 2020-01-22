@@ -1,14 +1,17 @@
+import java.util.Arrays;
+
 public class Mines {
 	private char[] mines;
 	private int[] countMines;
 	private int rows, columns;
 	private double mines_percentage = 20;
+	private boolean printBorder = false;
 
 	Mines(){
 
 	}
 
-	public void newMines(int rows, int cols){
+	public void newMines(MinesRand rand, int rows, int cols){
 		if(rows < 2 || cols == 1)
 			throw new IllegalArgumentException("Number of rows has to be bigger than 1, and number of columns has to be bigger than 1 or = 0 for the same amount of columns as rows.");
 
@@ -22,12 +25,7 @@ public class Mines {
 			countMines = newCounts;
 		}
 
-		int i = 0;
-		for(; i < newLength; i++){
-			mines[i] = '.';
-			countMines[i] = 0;
-		}
-
+		randomMines(rand, true);
 	}
 
 	public void randomMines(MinesRand rand, boolean useChoices){
@@ -36,11 +34,16 @@ public class Mines {
 		count = (int) dCount + 1;
 
 		int i = rows*columns;
+		if(i < 4)
+			throw new IndexOutOfBoundsException("Too small mines table to use it!");
+
 		int[] indices, list;
 		list = new int[i];
 		while(i > 0){
 			i--;
 			list[i] = i;
+			mines[i] = '.';
+			countMines[i] = 0;
 		}
 
 		if(useChoices){
@@ -49,5 +52,56 @@ public class Mines {
 			indices = rand.sample(list, count);
 		}
 
+		for(int j = 0; j < count; j++){
+			i = indices[j];
+			mines[i] = '*';
+		}
+	}
+
+	public void setBorder(){
+		printBorder = true;
+	}
+	public void unsetBorder(){
+		printBorder = false;
+	}
+	@Override
+	public String toString(){
+		StringBuilder text = new StringBuilder(" /");
+		int i, j, k = 0;
+
+		if(printBorder){
+			for(i = 0; i < columns; i++)
+				text.append("----");
+			text.deleteCharAt(text.length() - 1);
+			text.append("\\");
+
+			StringBuilder border, values;
+			for(i = 0; i < rows; i++){
+				border = new StringBuilder(" |");
+				values = new StringBuilder(" |");
+				for(j = 0; j < columns; j++, k++){
+					border.append("----");
+					if(mines[k] == '*') {
+						values.append(" * |");
+					} else {
+						values.append(" ").append(countMines[k]).append(" |");
+					}
+				}
+				text.append("\n").append(values).append("\n").append(border);
+			}
+		} else {
+			for(i = 0; i < rows; i++){
+				for(j = 0; j < columns; j++, k++){
+					if(mines[k] == '*'){
+						text.append(" *");
+					} else
+						text.append(" .");
+				}
+				text.append("\n");
+			}
+			text.deleteCharAt(text.length() - 1);// remove last '\n';
+		}
+
+		return text.toString();
 	}
 }
