@@ -68,6 +68,7 @@ public class Minesweeper {
 					minesMap = mines.toString();
 					break;
 				case 4:
+					mines.calculate();
 					mines.setBorder();
 					minesMap = mines.toString();
 					mines.unsetBorder();

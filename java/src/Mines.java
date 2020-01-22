@@ -58,6 +58,10 @@ public class Mines {
 		}
 	}
 
+	public void calculate(){
+
+	}
+
 	public void setBorder(){
 		printBorder = true;
 	}
