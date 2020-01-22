@@ -9,6 +9,10 @@
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+#  The same for subfolder:
+java/.idea/**/workspace.xml
+java/.idea/**/tasks.xml
+java/.idea/dictionaries
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -18,16 +22,29 @@
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
+#  The same for subfolder:
+java/.idea/**/dataSources/
+java/.idea/**/dataSources.ids
+java/.idea/**/dataSources.xml
+java/.idea/**/dataSources.local.xml
+java/.idea/**/sqlDataSources.xml
+java/.idea/**/dynamic.xml
+java/.idea/**/uiDesigner.xml
 
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
+#  The same for subfolder:
+java/.idea/**/gradle.xml
+java/.idea/**/libraries
 
 # CMake
 cmake-build-debug/
 
 # Mongo Explorer plugin:
 .idea/**/mongoSettings.xml
+#  The same for subfolder:
+java/.idea/**/mongoSettings.xml
 
 ## File-based project format:
 *.iws
@@ -36,21 +53,32 @@ cmake-build-debug/
 
 # IntelliJ
 /out/
+#  The same for subfolder:
+java/out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
+#  The same for subfolder:
+java/.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
+java/atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
 .idea/replstate.xml
+java/.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+#  The same for subfolder:
+java/com_crashlytics_export_strings.xml
+java/crashlytics.properties
+java/crashlytics-build.properties
+java/fabric.properties
 
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
@@ -62,6 +90,7 @@ fabric.properties
 
 # Sonarlint plugin
 .idea/sonarlint
+java/.idea/sonarlint
 
 ### Java ###
 # Compiled class file
@@ -75,6 +104,7 @@ fabric.properties
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+java/.mtj.tmp/
 
 # Package Files #
 *.jar
@@ -86,6 +116,7 @@ fabric.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+java/hs_err_pid*
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
@@ -130,6 +161,10 @@ hs_err_pid*
 __pycache__/
 *.py[cod]
 *$py.class
+#  The same for subfolder:
+python/__pycache__/
+python/*.py[cod]
+python/*$py.class
 
 # C extensions
 *.so
@@ -152,6 +187,22 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+#  The same for subfolder:
+python/.Python
+python/env/
+python/build/
+python/develop-eggs/
+python/dist/
+python/downloads/
+python/eggs/
+python/.eggs/
+python/lib/
+python/lib64/
+python/parts/
+python/sdist/
+python/var/
+python/wheels/
+python/.installed.cfg
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -184,6 +235,8 @@ local_settings.py
 # Flask stuff:
 instance/
 .webassets-cache
+python/instance/
+python/.webassets-cache
 
 # Scrapy stuff:
 .scrapy
@@ -193,12 +246,14 @@ docs/_build/
 
 # PyBuilder
 target/
+python/target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
 # pyenv
 .python-version
+python/.python-version
 
 # celery beat schedule file
 celerybeat-schedule
