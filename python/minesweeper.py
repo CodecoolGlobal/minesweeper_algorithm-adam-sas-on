@@ -80,20 +80,41 @@ def mines_from_example(table):
 
 #  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-def draw_board(stdscr, board, row_bg):
+def draw_mines(stdscr, table, row_bg):
 	stdscr.move(row_bg, 0)
 	stdscr.clrtobot()
 
 	i=0
-	while i < len(board):
+	while i < len(table):
 		stdscr.addstr(row_bg + i, 2, '.')
 		j=0
-		for col in board[i]:
+		for col in table[i]:
 			stdscr.addstr(row_bg + i, 2 + j*2, " {}".format(col) )
 			j+=1
 
 		i+=1
 
+#
+
+def draw_mines_border(stdscr, table, row_bg):
+	i=0
+	#cols=len([table[0]])
+	while i < len(table):
+		stdscr.addstr(row_bg + i*2, 2, "-")
+		stdscr.addstr(row_bg+1+i*2, 2, "|")
+		j=0
+		for col in table[i]: # wypisz gorna granice wiersza i jego samego;
+			stdscr.addstr(row_bg + i*2, 3+j*4, "----")
+			stdscr.addstr(row_bg+1+i*2, 3+j*4, " {} |".format(col) )
+			j+=1
+
+		i+=1
+
+	j=0
+
+	for col in table[i-1]: # wypisz dolna granice mapy;
+		stdscr.addstr(row_bg+i*2, 3+j*4, "----")
+		j+=1
 #
 
 def increase_neighbor_rows(table, row, col):
@@ -186,16 +207,16 @@ def run(stdscr):
 			table = new_table(size)
 			mines_from_example(table)
 
-			draw_board(stdscr, table, 7)
+			draw_mines(stdscr, table, 7)
 		elif (c == curses.KEY_ENTER or c == 10) and cmd == 1 and size > 1:
 			table = new_table(size)
 			random_mines(table, MINE_PERCENTAGE)
 
-			draw_board(stdscr, table, 7)
+			draw_mines(stdscr, table, 7)
 		elif (c == curses.KEY_ENTER or c == 10) and cmd == 2:
 			solve_mines_board(table)
 
-			draw_board(stdscr, table, 7)
+			draw_mines_border(stdscr, table, 7)
 # end run
 
 	curses.nocbreak()
