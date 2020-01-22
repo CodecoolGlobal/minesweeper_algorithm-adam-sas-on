@@ -13,7 +13,7 @@ public class Mines {
 	}
 
 	public void exampleMines(){
-		if(rows == 0 || mines.length < 9){
+		if(rows == 0 || mines == null || mines.length < 9){
 			mines = new char[9];
 			countMines = new int[9];
 		}
@@ -76,7 +76,36 @@ public class Mines {
 	}
 
 	public void solveMinesBoard(){
+		int[] checkingIndexes = new int[8];
 
+	}
+	private int minePositionToIndexes(int[] neighborIndexes, final int row, final int col){
+		int size = 0, index = row*rows + col, fullLength = rows*columns;
+		neighborIndexes[0] = (col > 0)?-1 - columns:0;
+		neighborIndexes[1] = -columns;
+		neighborIndexes[2] = (col < columns - 1)?1 - columns:0;
+		neighborIndexes[3] = (col > 0)?-1:0;
+		neighborIndexes[4] = (col < columns - 1)?1:0;
+		neighborIndexes[5] = (col > 0)?columns - 1:0;
+		neighborIndexes[6] = columns;
+		neighborIndexes[7] = (col < columns - 1)?columns + 1:0;
+
+		int indexValue;
+		for(int i = 0; i < 8; i++){
+			indexValue = neighborIndexes[i] + index;
+			if(neighborIndexes[i] != 0 && indexValue >= 0 && indexValue < fullLength)
+				neighborIndexes[size++] = indexValue;
+		}
+
+		return size;
+	}
+	private void increaseNeighborCells(int[] neighborIndexes, final int size){
+		int index;
+		for(int i = 0; i < size; i++){
+			index = neighborIndexes[i];
+			if(mines[index] != '*')
+				countMines[index]++;
+		}
 	}
 
 	public void setBorder(){
