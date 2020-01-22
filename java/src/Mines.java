@@ -1,10 +1,9 @@
-import java.util.Arrays;
 
 public class Mines {
 	private char[] mines;
 	private int[] countMines;
 	private int rows, columns;
-	private double mines_percentage = 20;
+	private double mines_percentage = 20.0;
 	private boolean printBorder = false;
 	private boolean calculated = false;
 
@@ -160,6 +159,12 @@ public class Mines {
 						values.append(" ").append(countMines[k]).append(" |");
 					}
 				}
+
+				border.deleteCharAt(border.length() - 1);
+				if(i < rows - 1)
+					border.append('|');
+				else
+					border.append('/');
 				text.append("\n").append(values).append("\n").append(border);
 			}
 		} else if(rows > 0){
