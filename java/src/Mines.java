@@ -66,10 +66,15 @@ public class Mines {
 	}
 	@Override
 	public String toString(){
-		StringBuilder text = new StringBuilder(" /");
+		if(rows < 1)
+			return "";
+
+		StringBuilder text = new StringBuilder();
 		int i, j, k = 0;
 
 		if(printBorder){
+			text.append(" /");
+
 			for(i = 0; i < columns; i++)
 				text.append("----");
 			text.deleteCharAt(text.length() - 1);
@@ -89,7 +94,7 @@ public class Mines {
 				}
 				text.append("\n").append(values).append("\n").append(border);
 			}
-		} else {
+		} else if(rows > 0){
 			for(i = 0; i < rows; i++){
 				for(j = 0; j < columns; j++, k++){
 					if(mines[k] == '*'){
