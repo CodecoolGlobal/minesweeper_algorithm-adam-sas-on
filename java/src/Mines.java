@@ -8,7 +8,24 @@ public class Mines {
 	private boolean printBorder = false;
 
 	Mines(){
+		rows = columns = 3;
+		exampleMines();
+	}
 
+	public void exampleMines(){
+		if(rows == 0 || mines.length < 9){
+			mines = new char[9];
+			countMines = new int[9];
+		}
+
+		rows = columns = 3;
+		int i, count = 9;
+		for(i = 0; i < count; i++){
+			mines[i] = '.';
+			countMines[i] = 0;
+		}
+
+		mines[2] = mines[6] = '*';
 	}
 
 	public void newMines(MinesRand rand, int rows, int cols){
@@ -58,7 +75,7 @@ public class Mines {
 		}
 	}
 
-	public void calculate(){
+	public void solveMinesBoard(){
 
 	}
 
