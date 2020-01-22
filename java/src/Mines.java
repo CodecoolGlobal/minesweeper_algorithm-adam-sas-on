@@ -6,6 +6,7 @@ public class Mines {
 	private int rows, columns;
 	private double mines_percentage = 20;
 	private boolean printBorder = false;
+	private boolean calculated = false;
 
 	Mines(){
 		rows = columns = 3;
@@ -26,6 +27,7 @@ public class Mines {
 		}
 
 		mines[2] = mines[6] = '*';
+		calculated = false;
 	}
 
 	public void newMines(MinesRand rand, int rows, int cols){
@@ -73,11 +75,27 @@ public class Mines {
 			i = indices[j];
 			mines[i] = '*';
 		}
+		calculated = false;
 	}
 
 	public void solveMinesBoard(){
-		int[] checkingIndexes = new int[8];
+		if(calculated)
+			return;
 
+		int[] checkingIndexes = new int[8];
+		int i, j, size, index;
+
+		for(i = 0; i < rows; i++){
+			index = i*columns;
+			for(j = 0; j < columns; j++){
+				if(mines[index++] != '*')
+					continue;
+
+				size = minePositionToIndexes(checkingIndexes, i, j);
+				increaseNeighborCells(checkingIndexes, size);
+			}
+		}
+		calculated = true;
 	}
 	private int minePositionToIndexes(int[] neighborIndexes, final int row, final int col){
 		int size = 0, index = row*rows + col, fullLength = rows*columns;
